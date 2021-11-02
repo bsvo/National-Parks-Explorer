@@ -1,0 +1,89 @@
+.clipboard {
+    background-color:transparent;
+    border:none;
+    cursor: pointer;
+    outline: none;    
+}
+
+.daterange-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+}
+.datepicker-wrapper {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.field-wrapper {
+    cursor: pointer;
+    width: fit-content;
+}
+
+.order-field:active {     
+    background-color:#ffcc80;
+}
+
+.menu-open:hover + .button-menu {
+    display: block;
+}
+.button-menu {
+    display: none;
+}
+.button-menu:hover {
+    display: block;
+}
+.block-wrapper {
+    border-radius: 15px;
+    border: solid rgb(233, 233, 233) 0.5px;
+    padding: 20px;
+    transition: 0.5s;
+}
+.block-wrapper:hover {
+    transition: 0.5s;
+    box-shadow: 1px 1px 5px #c5c5c5;
+}
+
+/* Order View Styles */
+.order-view-card {
+    border-radius: 15px;
+    /* box-shadow: 1px 1px 5px #c5c5c5; */
+    margin-bottom: 50px;
+    transition: 0.5s;
+}
+.order-view-card:hover {
+    /* box-shadow: 1px 1px 10px #b8b8b8; */
+}
+
+.order-view-header{
+    background-color: #FFC074;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.order-view-details-container {
+    background-color: #FAF1E6;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 10px;
+}
+
+.order-info-group {
+    background-color: white;
+    border-radius: 15px;
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+}
+.order-group-header {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-bottom: 5px;
+}
