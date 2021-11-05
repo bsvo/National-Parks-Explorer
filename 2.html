@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/fc-3.3.3/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/fc-3.3.3/datatables.min.js"></script>
+<style>
+.block-wrapper {
+    border-radius: 15px;
+    border: solid rgb(233, 233, 233) 4px;
+    padding: 20px;
+    transition: 0.5s;
+}
+.block-wrapper:hover {
+    transition: 0.5s;
+    box-shadow: 1.25px 1.25px 5px #c5c5c5;
+}
+
+.block-wrapper-thin {
+    border-radius: 15px;
+    border: solid rgb(233, 233, 233) 2px;
+    padding: 20px;
+    transition: 0.5s;
+}
+.block-wrapper-thin:hover {
+    transition: 0.5s;
+    box-shadow: 3px 3px 5px #c5c5c5;
+}
+
+.img {
+  border: 50px solid #555;
+}
+
+.a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+.next {
+  background-color: #f8de7e;
+  color: #35586C;
+}
+
+
+.valign1, .valign2{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.halign1, .halign2,.halign3{
+  display: inline-block;
+  horizonal-align: middle;
+}
+
+/*.button
+{
+	background-color: black;
+	width: 150px;
+	height: 40px;
+}*/
+
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.hiking {
+  border: none;
+  padding: 0;
+  background-size: cover;
+  background-color: #35586C;
+    background: "./images/hiking.png";
+
+  margin: 0px;
+  width: 200px;
+  height: 200px;
+
+}
+
+
+</style>
+<body onload="loadActivities()"></body>
+<body style="background-color: #35586C;">
+<div class="container" style="margin-top: 50px; margin-bottom: 150px; text-align:center;">
+	<h1 style="padding-bottom: 20px; text-align: center; font-family: Helvetica; color: rgb(233, 233, 233); font-size: 40px"> National Parks Dashboard </h1>
+	<div class="block-wrapper" id="ok"  style="width: 1000px; height : auto; margin: auto; text-align:center;">
+		<h1 class = "valign1"; style="padding-bottom: auto; text-align: center; font-family: Helvetica; color: rgb(233, 233, 233);text-shadow: 1px 1px #f8de7e; font-size: 30px; font-weight: lighter; text-decoration-color: #f8de7e"> Select an activity or go to webcam footage</h1>
+		<a href="1.html" class="next valign2" style="font-size: 20px; margin-left: 25px; width: 65px; height: 30px; text-align: center;">&raquo;</a>
+		<hr color = "#f8de7e" class="rounded" style="width: 600px; height: 1px; margin-bottom: 50px">
+    <div id="images"; style="background-color: transparent;">
+    	</div>
+    </div>
+    </div>
+</div>
+ </body>
+
+
+
+<script>
+  let imageHeader = $("#imageheader");
+  let imageHolder = $("#images");
+
+  function loadActivities(){
+  	//Calls every park in the National parks and stores its data in ret
+  	  $.get("https://developer.nps.gov/api/v1/activities/parks?api_key=r8bG0gFHhPzhVVvZngC3RBKn63hzD9sYdZVJO1tF",{
+  	   	limit : 500
+  	   })
+  	   	.done(function (activities){
+  	   		 console.log(activities.data);
+  	   		$("#images").html("");
+  	   		var div = document.createElement("div");
+  	   		//blockWrapper.class = "unstyled-button";
+  	   		//div.setAttribute('class', 'blockWrapper');
+  	   		div.innerHTML = document.getElementById('imageFormatting').innerHTML;
+  	   		// blockWrapper.innerHTML = '<div class="hiking"></div>';
+    	   		//blockWrapper.type = "button";
+  	   		//blockWrapper.style.background-color = .green;
+	  	 //   	var image = document.createElement("img");
+					// image.setAttribute("src", "./images/hiking.png");
+					// image.width = 75;
+					// image.margin = 20;
+					// blockWrapper.width = 75;
+					document.getElementById("images").appendChild(div);
+
+
+  	   	//console.log("web data");
+
+
+
+  	   	})
+
+
+		}
+
+		  function loadGs(){
+  	//Calls every park in the National parks and stores its data in ret
+  		console.log("bruh");
+
+
+
+
+		}
+
+
+
+
+</script>
+
+
+<script id="imageFormatting" type=".hiking">
+	<div onclick = "loadGs()"class="block-wrapper-thin halign1"  style="width: 100px; height : 125px; margin: auto; text-align:center;" href = "./html1">
+	<img class = "halign2" src= './images/hiking.png' style="width: 100px; height: 100px; margin-bottom: -10px; text-align:center;">   </img>
+	<h1 class = "halign3" style= "color:rgb(233, 233, 233); font-size: 25px; font-family: Helvetica;font-weight: lighter;">Hiking</h1>
+	</div>
+</script>
+
+
+
