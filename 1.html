@@ -236,29 +236,6 @@ function loadActivities(activityName){
 }
 
 
-function getInfoPage(name, activityName){
-  $.get("https://developer.nps.gov/api/v1/activities/parks?api_key=r8bG0gFHhPzhVVvZngC3RBKn63hzD9sYdZVJO1tF",{
-    limit : 500,
-    q : activityName
-  })
-  .done(function (activities){
-    console.log(activities.data);
-        for(var j in activities.data[0]["parks"]){
-          if(name == activities.data[0]["parks"][j]["fullName"]){
-            console.log("bruh");
-            console.log(activities.data[0]["parks"][j]["url"]);
-          }
-      }
-    // for(var i in activities.data[0]["parks"]){
-    //   parkCodes.push(activities.data[0]["parks"][i]["parkCode"]);
-    // }
-  //console.log(parkCodes);
-
-
-  })
-
-}
-
 
 
 

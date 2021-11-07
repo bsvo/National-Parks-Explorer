@@ -170,7 +170,7 @@
 	    circle.tooltipText = "{title}";
 	    circle.clickable = true;
 	    imageSeriesTemplate.events.on("hit", (ev)=>{
-		  makeCopy(ev.target.dataItem.dataContext.title);
+		  addWebcamImages(ev.target.dataItem.dataContext.title);
 		  window.scrollTo(0,600);
 		})
 
@@ -187,7 +187,7 @@
 
 }
 
-function makeCopy(parkName){
+function addWebcamImages(parkName){
 	$("#images").html("");
 	//creates images for each link in imageData associate with webcam footages and adds them to "images div"
 	for(const park in imageData){
