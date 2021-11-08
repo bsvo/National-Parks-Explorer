@@ -80,12 +80,14 @@
 	 'OH','OK','OR','PA','RI','SC','SD','TN','TX','UT',
 	 'VT','VA','WA','WV','WI','WY'
 	];
+	
   function makeMap(){
   	//Calls every park in the National parks and stores its data in ret
   	  $.get("https://developer.nps.gov/api/v1/webcams?api_key=r8bG0gFHhPzhVVvZngC3RBKn63hzD9sYdZVJO1tF",{
   	   	limit : 500
   	   })
   	   	.done(function (webcam){
+
   	   		//takes parks with webcam data and adds their names, latitude and longitude to locationData. Pushes each park's webcam images to imageData
   	   		for(let webcamImage in webcam.data){
   	   			if(webcam.data[webcamImage]["relatedParks"].length > 0 && webcam.data[webcamImage]["images"].length > 0){
@@ -189,10 +191,12 @@
 
 function addWebcamImages(parkName){
 	$("#images").html("");
+
 	//creates images for each link in imageData associate with webcam footages and adds them to "images div"
 	for(const park in imageData){
 		if(park == parkName){
 			imageHeader.text("Webcam footage from " + parkName);
+
 			for(var i in imageData[park]){
 				var elem = document.createElement("img");
 				jpgPath = imageData[park][i];

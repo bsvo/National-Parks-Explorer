@@ -62,18 +62,6 @@
   horizonal-align: middle;
 }
 
-/*.button
-{
-	background-color: black;
-	width: 150px;
-	height: 40px;
-}*/
-
-.unstyled-button {
-  border: none;
-  padding: 0;
-  background: none;
-}
 
 
 
@@ -104,21 +92,18 @@
 
   function createActivities(){
     var activityPaths = ["hiking","astronomy","biking", "boating","camping","climbing", "fishing", "skiing", "surfing", "swimming", "compass", "scuba"];
-  	//Calls every park fffin the National parks and stores its data in ret
+  	//Calls every park in the National parks and stores its data in ret
 
   	$("#images").html("");
 
     for(const path in activityPaths){
       currentPath = activityPaths[path];
-      //console.log(currentPath);
       var div = document.createElement("div");
       //formats block wrapper and image representing activity
       div.innerHTML = document.getElementById(currentPath).innerHTML;
       document.getElementById("images").appendChild(div);
 
     }
-
-
 	}
 
 function loadActivities(activityName){
@@ -136,6 +121,7 @@ function loadActivities(activityName){
     q : activityName
   })
   .done(function (activities){
+
     for(var i in activities.data[0]["parks"]){
       parkCodes.push(activities.data[0]["parks"][i]["parkCode"]);
     }
@@ -145,6 +131,7 @@ function loadActivities(activityName){
     limit : 500
   })
   .done(function (parkInfo){
+
     for(let park in parkInfo.data){
       if(parkCodes.includes(parkInfo.data[park]["parkCode"]) && stateAbbreviations.includes(parkInfo.data[park]["states"])){
         var name = parkInfo.data[park]["fullName"].toString();
@@ -161,7 +148,6 @@ function loadActivities(activityName){
     }
 
     am4core.ready(function () {
-
 
       am4core.useTheme(am4themes_animated);
 
