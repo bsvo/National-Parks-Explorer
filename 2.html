@@ -51,7 +51,7 @@
 	<h1 style="padding-bottom: 20px; text-align: center; font-family: Helvetica; color: rgb(233, 233, 233); font-size: 40px"> National Parks Dashboard </h1>
 	<div class="block-wrapper" id="ok"  style="width: 1000px; height : auto; margin: auto; text-align:center;">
 		<h1 class = "mapheader" style="padding-bottom: auto; text-align: center; font-family: Helvetica; color: rgb(233, 233, 233);text-shadow: 1px 1px #f8de7e; font-size: 30px; font-weight: lighter; text-decoration-color: #f8de7e"> Select a Park or go to activities</h1>
-		<a href="1.html" class="next toactivities" style="font-size: 20px; margin-left: 25px; width: 65px; height: 30px; text-align: center;">&raquo;</a>
+		<a href="index.html" class="next toactivities" style="font-size: 20px; margin-left: 25px; width: 65px; height: 30px; text-align: center;">&raquo;</a>
 		<hr color = "#f8de7e" class="rounded" style="width: 600px; height: 1px">
 		<div id="chartdiv" style="margin: auto; width: 1000px; height : 600px;">
     		<body onload="makeMap()"></body>
@@ -71,7 +71,7 @@
   let imageHeader = $("#imageheader");
   let imageHolder = $("#images");
   let parksWithCams = [];
-  let webcamData = [];
+  let locationData = [];
   let imageData = {};
   const stateAbbreviations = [
 	 'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA',
@@ -86,25 +86,25 @@
   	   	limit : 500
   	   })
   	   	.done(function (webcam){
-  	   		//takes parks with webcam data and adds their names, latitude and longitude to webcamData. Pushes each park's webcame images to imageData
-  	   		for(let park in webcam.data){
-  	   			if(webcam.data[park]["relatedParks"].length > 0 && webcam.data[park]["images"].length > 0){
-  	   				var name = webcam.data[park]["relatedParks"][0]["fullName"].toString();
-  	   				var longitude = Number(webcam.data[park]["longitude"]);
-  	   				var latitude = Number(webcam.data[park]["latitude"]);
-  	   				if(name in imageData){
-  	   					imageData[name].push(webcam.data[park]["images"][0]["url"]);
-  	   				} else {
-  	   					imageData[name] = [];
-  	   					imageData[name].push(webcam.data[park]["images"][0]["url"]);
-
-  	   				}
+  	   		//takes parks with webcam data and adds their names, latitude and longitude to locationData. Pushes each park's webcam images to imageData
+  	   		for(let webcamImage in webcam.data){
+  	   			if(webcam.data[webcamImage]["relatedParks"].length > 0 && webcam.data[webcamImage]["images"].length > 0){
+  	   				var name = webcam.data[webcamImage]["relatedParks"][0]["fullName"].toString();
+  	   				var longitude = Number(webcam.data[webcamImage]["longitude"]);
+  	   				var latitude = Number(webcam.data[webcamImage]["latitude"]);
   	   				temp = {}
   	   				temp["title"] = name;
   	   				temp["longitude"] = longitude;
   	   				temp["latitude"] = latitude;
+  	   				if(name in imageData){
+  	   					imageData[name].push(webcam.data[webcamImage]["images"][0]["url"]);
+  	   				} else {
+  	   					imageData[name] = [];
+  	   					imageData[name].push(webcam.data[webcamImage]["images"][0]["url"]);
+
+  	   				}
   	   				if(!parksWithCams.includes(name)){
-  	   					webcamData.push(temp);
+  	   					locationData.push(temp);
   	   					parksWithCams.push(name);
   	   				}
   	   				
@@ -178,7 +178,7 @@
 	    imageSeriesTemplate.propertyFields.latitude = "latitude";
 	    imageSeriesTemplate.propertyFields.longitude = "longitude";
 
-		imageSeries.data = webcamData;
+		imageSeries.data = locationData;
 
 	    //imageSeries.data = mapData;
   });
@@ -191,8 +191,8 @@ function addWebcamImages(parkName){
 	$("#images").html("");
 	//creates images for each link in imageData associate with webcam footages and adds them to "images div"
 	for(const park in imageData){
-		imageHeader.text("Webcam footage from " + parkName);
 		if(park == parkName){
+			imageHeader.text("Webcam footage from " + parkName);
 			for(var i in imageData[park]){
 				var elem = document.createElement("img");
 				jpgPath = imageData[park][i];
